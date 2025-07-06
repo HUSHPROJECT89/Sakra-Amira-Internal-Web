@@ -1,30 +1,35 @@
 // admin.js
-function loginAdmin() {
-  const user = document.getElementById('username').value;
-  const pass = document.getElementById('password').value;
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("loginForm");
 
-  const allowed = {
-    'admin1': '123',
-    'admin2': '456',
-    'fariz': 'sakra'
-  };
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-  if (allowed[user] && allowed[user] === pass) {
-    localStorage.setItem('admin_logged_in', user);
-    window.location.href = 'dashboard.html';
-    return false;
-  } else {
-    document.getElementById('error').textContent = 'Login gagal! Coba lagi.';
-    return false;
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value;
+
+      const admins = [
+        { user: "admin1", pass: "123" },
+        { user: "admin2", pass: "admin" },
+        { user: "admin3", pass: "rahasia" }
+      ];
+
+      const valid = admins.some(admin => admin.user === username && admin.pass === password);
+
+      if (valid) {
+        localStorage.setItem("admin_logged_in", "true");
+        window.location.href = "dashboard.html";
+      } else {
+        alert("Username atau password salah!");
+      }
+    });
   }
-}
 
-// Auto-redirect jika tidak login dan buka dashboard/data
-if (['dashboard.html', 'data.html'].some(p => location.pathname.endsWith(p))) {
-  const admin = localStorage.getItem('admin_logged_in');
-  if (!admin) {
-    window.location.href = 'index.html';
+  // Auto-redirect jika sudah login
+  if (localStorage.getItem("admin_logged_in") === "true") {
+    if (window.location.pathname.includes("index.html")) {
+      window.location.href = "dashboard.html";
+    }
   }
-} else if (location.pathname.endsWith('dashboard.html')) {
-  document.querySelector('h2')?.insertAdjacentHTML('afterend', `<p>Halo, <b>${localStorage.getItem('admin_logged_in')}</b></p>`);
-}
+});
