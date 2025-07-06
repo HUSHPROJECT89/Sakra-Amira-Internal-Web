@@ -1,35 +1,66 @@
-
+/* style.css */
 body {
-  font-family: sans-serif;
   margin: 0;
-  padding: 0;
-  background-color: #f2f2f2;
+  font-family: 'Poppins', sans-serif;
+  background-color: #e8faff;
+  color: #222;
 }
+
 .navbar {
-  background-color: #222;
-  color: #fff;
-  padding: 1em;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-.navbar nav a {
-  color: #fff;
-  margin-left: 1em;
-  text-decoration: none;
-}
-.content {
-  padding: 2em;
-}
-input, select, textarea {
-  width: 100%;
-  padding: 0.5em;
-  margin-bottom: 1em;
-}
-button.btn.merah {
-  background-color: #e53935;
+  background-color: #d40000;
   color: white;
-  padding: 0.5em 1em;
+  padding: 10px 20px;
+  flex-wrap: wrap;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-img {
+  height: 50px;
+}
+
+.content {
+  padding: 30px;
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 50px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn {
+  padding: 10px 20px;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;
+  color: white;
+}
+
+.btn.merah {
+  background-color: #d40000;
+}
+
+.btn.merah:hover {
+  background-color: #a30000;
 }

@@ -1,21 +1,30 @@
+// admin.js
+function loginAdmin() {
+  const user = document.getElementById('username').value;
+  const pass = document.getElementById('password').value;
 
-const admins = [
-  { username: "admin1", password: "admin123" },
-  { username: "admin2", password: "sakura456" },
-  { username: "fariz", password: "twin98" },
-];
+  const allowed = {
+    'admin1': '123',
+    'admin2': '456',
+    'fariz': 'sakra'
+  };
 
-document.getElementById("loginForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
-
-  const found = admins.find(admin => admin.username === username && admin.password === password);
-
-  if (found) {
-    localStorage.setItem("admin_logged_in", username);
-    window.location.href = "dashboard.html";
+  if (allowed[user] && allowed[user] === pass) {
+    localStorage.setItem('admin_logged_in', user);
+    window.location.href = 'dashboard.html';
+    return false;
   } else {
-    document.getElementById("loginError").innerText = "Username atau password salah!";
+    document.getElementById('error').textContent = 'Login gagal! Coba lagi.';
+    return false;
   }
-});
+}
+
+// Auto-redirect jika tidak login dan buka dashboard/data
+if (['dashboard.html', 'data.html'].some(p => location.pathname.endsWith(p))) {
+  const admin = localStorage.getItem('admin_logged_in');
+  if (!admin) {
+    window.location.href = 'index.html';
+  }
+} else if (location.pathname.endsWith('dashboard.html')) {
+  document.querySelector('h2')?.insertAdjacentHTML('afterend', `<p>Halo, <b>${localStorage.getItem('admin_logged_in')}</b></p>`);
+}
